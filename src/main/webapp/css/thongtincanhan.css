@@ -1,0 +1,101 @@
+.container_css{
+	width: 101.5rem;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	background-color: var(--maincolor);
+	padding: 0;
+}
+
+.box_info{
+	height: auto;
+    background-color: #fff;
+    display: flex; 
+    flex-direction: column; 
+    justify-content: space-around;
+    align-items: center;
+    margin: 1rem;
+    padding: 0;
+}
+.box_info label{
+	height: 2.5rem;
+    width: 10rem;
+    display: flex; flex-direction: row;
+    justify-content: start;
+}
+.control{
+    height: 2.5rem;
+    width: 15rem;
+    display: flex;
+    justify-content: center;
+}
+.control_more{
+    height: 2.5rem;
+    width: 13rem;
+    display: flex;
+    justify-content: center;
+}
+.button_icon_small{
+	width: 2rem;
+	height:1rem;
+	background: #fff;
+}
+.button_icon_small i{
+	color: var(--maincolor);
+}
+.btn_mk{
+    width: 15rem;
+  	height: 3rem;
+  	background: var(--maincolor);
+  	cursor: pointer;
+  	color: #FFFFFF;
+  	font-size:20px;
+  	display: flex;
+  	justify-content: center;
+  	margin-bottom: 2rem;
+}
+input { text-transform: none; }
+.button_luu{
+    position: absolute;
+    width: 5rem;
+    height: 5rem;
+    top: 16.5rem;
+    left: 93rem;
+    background-color: var(--maincolor);
+    border: none;
+    border-radius: 5rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.button_luu:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.button_show{
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: var(--maincolor);
+    border-radius: 5rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.form_add {
+    width: 100rem;
+    height: 30rem;
+    top: 20rem;
+    left:30rem;
+}
+.form_button{
+    margin: 1rem;
+    display: flex; flex-direction: row; justify-content: space-around;
+}
+.form_button button{
+    width: 10rem; height: 3rem;
+    background-color: var(--maincolor);
+    color: white;
+}
+.form_title{
+    width: 100%; height: 3rem;
+    background-color: #4F4F4F;
+    text-align: center;
+    color: white;
+    margin-bottom: 1rem;
+}

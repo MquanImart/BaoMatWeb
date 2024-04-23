@@ -1,0 +1,54 @@
+input { text-transform: none; }
+.button_luu{
+    position: absolute;
+    width: 5rem;
+    height: 5rem;
+    top: 16.5rem;
+    left: 93rem;
+    background-color: var(--maincolor);
+    border: none;
+    border-radius: 5rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.button_luu:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.button_show{
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: var(--maincolor);
+    border-radius: 5rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.form_tacvu{
+    display: none;
+    position: fixed;
+    background-color: #F4F5F7;
+    border: 3px solid var(--maincolor);
+    box-shadow: 0 0 1rem 0.3rem var(--maincolor);
+    z-index: 9;
+}
+.form_add {
+    width: 100rem;
+    height: 30rem;
+    top: 20rem;
+    left:30rem;
+}
+.form_button{
+    margin: 1rem;
+    display: flex; flex-direction: row; justify-content: space-around;
+}
+.form_button button{
+    width: 10rem; height: 3rem;
+    background-color: var(--maincolor);
+    color: white;
+}
+.form_title{
+    width: 100%; height: 3rem;
+    background-color: #4F4F4F;
+    text-align: center;
+    color: white;
+    margin-bottom: 1rem;
+}

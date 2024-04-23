@@ -1,0 +1,101 @@
+    h1{
+    font-size: 3.5rem;
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 10rem;
+}
+
+.image {
+    float: left;
+}
+.form{
+    float: right;
+    width: 42rem;
+    background: #F5F5F5;
+    border: 0.1rem solid var(--maincolor);
+    border-radius: 2rem;
+    padding: 2rem;
+}
+
+.input-box{
+    width: 36rem;
+    height: 5rem;
+    align-self: center;
+    display: flex; flex-direction: row; justify-content: center;
+    margin: 2rem;
+ }
+
+.input-box input{
+    width: 30rem;
+    height: 5rem    ;
+    background: #C0C0C0;
+    border-radius: 25px;
+    font-size: 16px;
+    color: #FFFFFF;
+}
+
+.input-box input::placeholder{
+    color: #FFFFFF;
+    padding-left: 2rem;
+}
+
+.box_icon_login{
+    width: 5.5rem ; height: 5rem;
+    display: flex; justify-content: center; align-content: center;
+}
+
+.input-box i{
+    width: 4.5rem; height: 4rem;
+    padding-right: 1rem;
+    padding-top: 2rem;
+}
+
+.forgot-change{
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+    margin: 30px 10px 30px;
+    padding: 0 10px;
+}
+
+.forgot-change a{
+    color: #0000FF;
+    text-decoration: none;
+    margin: 0 40px auto;
+}
+.box_button_login{
+    width: 100%; height: 5rem;
+    display: flex; flex-direction: row; justify-content: center;
+}
+.btn{
+    width: 25rem;
+    height: 5rem;
+    background: var(--maincolor);
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+    color: #FFFFFF;
+    font-size:20px;
+    justify-content: center;
+}
+
+.box_show{
+    color: red;
+    display: flex; flex-direction: row; justify-content: end;
+}
+
+.btn_gui{
+    width: 20rem; height: 4rem;
+    border-radius: 0;
+    background-color: var(--maincolor);
+}
+.box_form_a{
+    width: 100%;
+    display: flex; justify-content: space-between;
+}

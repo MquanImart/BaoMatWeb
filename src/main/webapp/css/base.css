@@ -1,0 +1,67 @@
+:root{
+    --maincolor:#4F4F4F;
+  }
+  
+ *{
+    font-family: 'Segoe UI'; 
+    margin:0; 
+    padding:0;
+    box-sizing: border-box;
+    text-transform: capitalize;
+    font-size: 1.4rem;
+    outline: none; border:none;
+    text-decoration: none;  
+    transition: all .2s linear;
+  }
+  html{
+  font-size: 62.5%;
+  overflow-x: hidden;
+  scroll-padding-top: 6rem;
+  scroll-behavior: smooth;
+}
+.container_css{
+	display: grid;
+}
+.navbar_css {
+	background-color: var(--maincolor); 
+	width: 101.5rem; height: 5rem;
+	margin-top:0.5rem;
+}
+.box_button{
+	width: 20rem;
+	display: grid;
+}
+.button_icon{
+	width: 5rem; height: 5rem;
+	background-color: var(--maincolor);
+	border: none;
+	border-radius: 5rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.button_icon:hover{
+    background-color: rgba(0,0,0, 0.5);
+}
+.box_form{
+	display: flex; flex-direction: row; 
+	padding: 5px;
+	background-color: var(--maincolor);
+}
+.box_content{
+	background-color: white;
+	padding: 5px;
+}
+.label_form_control{
+	width: 20rem;
+}
+.box_form_control{
+	width: 60rem !important;
+}
+.box_search{
+	width: 10rem !important;
+}
+.table-container {
+    max-height: 350px; /* Set the desired height */
+    border: 2px solid black;
+    overflow: auto;
+}

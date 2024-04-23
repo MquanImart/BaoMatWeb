@@ -1,0 +1,224 @@
+.button_add{
+    width: 16rem; height: 3rem;
+    background-color: var(--maincolor);
+    color: white;
+}
+.form_yeucau {
+    width: 40rem;
+    height: 15rem;
+    display: none;
+    position: fixed;
+    top: 15rem;
+    left:40rem;
+    background-color: #F4F5F7;
+    border: 3px solid var(--maincolor);
+    box-shadow: 0 0 1rem 0.3rem var(--maincolor);
+    z-index: 9;
+}
+.form_chidinh{
+    width: 40rem;
+    height: 20rem;
+    display: none;
+    position: fixed;
+    top: 40rem;
+    left:60rem;
+    background-color: #F4F5F7;
+    border: 3px solid var(--maincolor);
+    box-shadow: 0 0 1rem 0.3rem var(--maincolor);
+    z-index: 9;
+}
+
+.form_title{
+    text-align: center;
+    color: white;
+    margin-bottom: 1rem;
+    width: 100%; height: 3rem;
+    background-color: #4F4F4F;
+}
+.form-container {
+    max-width: 90rem;
+    max-height: 50rem;
+}
+.form_button{
+    margin: 1rem;
+    display: flex; flex-direction: row; justify-content: space-around;
+}
+.form_button button{
+    width: 10rem; height: 3rem;
+    background-color: var(--maincolor);
+    color: white;
+}
+.form_button select{
+    width: 20rem !important;
+}
+
+.main_content{
+    width: 100%;
+    height:370px;
+    background-color: var(--maincolor);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: stretch;
+    align-items: flex-start;
+}
+
+.name_infor{
+    height: 40px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin: 10px;
+}
+
+.main_infor{
+    height: 300px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin: 10px;
+}
+
+.infor{
+    width: 90%;
+    height: 40px;
+    display: flex; flex-direction: row; justify-content: space-between;
+    margin: 5px;
+}
+
+.infor label {
+    display: inline-block;
+    width: 150px;
+}
+
+.control{
+    height: 25px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.btn_mk{
+    width: 100%;
+    height: 20%;
+    background: #333333;
+    cursor: pointer;
+    color: #FFFFFF;
+    font-size:20px;
+    display: flex;
+    justify-content: center;
+    margin: 20% 0;
+    padding: 10px 15px 35px 10px;
+}
+
+.cb_show{
+    transform: scale(1.5);
+}
+.box_button_add{
+    width: 101.5rem; height: 3rem;
+    margin-top: 1rem;
+}
+.button_text{
+    width: 100%; height: 3rem;
+    color: white;
+    background-color: var(--maincolor);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.button_text:hover{
+    background-color: rgba(0,0,0, 0.5);
+}
+.button_show{
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: var(--maincolor);
+    border-radius: 5rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.box_button_add{
+    margin: 2rem;
+    width: 101.5rem;
+    height: 3rem;
+    background-color: var(--maincolor);
+}
+.button_text{
+    width: 100%; height: 100%;
+    color: white;
+    text-align: center;
+    background-color: transparent;
+}
+.form_add {
+    width: 100rem;
+    height: 30rem;
+    top: 20rem;
+    left:30rem;
+}
+.form_sathai{
+    width: 40rem;
+    height: 25rem;
+    top: 30rem;
+    left:60rem;
+}
+.form_chidinhcongviec{
+    width: 40rem;
+    height: 25rem;
+    top: 30rem;
+    left:60rem;
+}
+.form_xoa h5{
+    width: 100%;
+    height: 5rem;
+}
+.form_thongbao{
+    width: 40rem;
+    height: 40rem;
+    display: none;
+    position: fixed;
+    top: 20rem;
+    left:82rem;
+    background-color: #F4F5F7;
+    border: 3px solid var(--maincolor);
+    box-shadow: 0 0 1rem 0.3rem var(--maincolor);
+    z-index: 9;
+}
+.form_tinhtrang{
+    width: 40rem;
+    height: 25rem;
+    top: 30rem;
+    left:60rem;
+}
+.form_thongbao li{
+    width: 40rem; height: 6rem;
+    border: 1px solid var(--maincolor);
+    display: flex; flex-direction: row; justify-content: space-around;
+}
+.box_button_thongbao{
+    position: fixed;
+    top: 55rem;
+    left:95rem;
+}
+.box_noidung_thongbao{
+    width: 30rem;
+}
+.box_tinhtrang_thongbao{
+    width: 5rem;
+    text-align: center;
+}
+.box_check_thongbao{
+    width: 5rem;
+    display: flex; flex-direction: column; justify-content: center;
+}
+.box_check_thongbao a{
+    width: 2.5rem; height: 2.5rem;
+    background-color: transparent;
+}
+.greencolor{
+    color: green;
+}
+.redcolor{
+    color: red;
+}

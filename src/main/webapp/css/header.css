@@ -1,0 +1,28 @@
+.wrapper {
+	width: 1170px;
+	margin: 0 auto;
+}
+header {
+	height: 50px;
+	background:#4F4F4F;
+	width: 100%;
+	z-index: 10;
+	position: fixed;
+}
+.logo-header {
+	width: 30%;
+	float: left;
+	line-height: 50px;
+	margin-left: -110px;
+}
+.logo-header a {
+	text-decoration: none;
+	font-size: 30px;
+	font-family: 'Segoe UI'; 
+	color: #fff;
+	letter-spacing: 5px;
+	float: left;
+}
+
+
+

@@ -1,0 +1,31 @@
+.body-infor {
+    width: 100%;
+
+    border: 2px solid black;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Create three equal-width columns */
+    justify-content: space-around;
+    margin-top: 60px;
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 5px;    
+    padding: 10px;
+    border: 2px solid black;
+    background-color: #4F4F4F;
+}
+
+h2 {
+    color: white;
+    margin: 0;
+    margin-left: 10px; /* Optional: Add margin between icon and heading */
+}
+
+i {
+    color: white;
+    font-size: 30px; /* Adjust the font size as needed */
+}

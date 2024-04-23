@@ -1,0 +1,58 @@
+/* Thêm định dạng cho phần tử form */
+form {
+    width: 50%; /* Đặt chiều rộng của form tùy ý */
+    height: 800px;
+    margin: 0 auto; /* Để căn giữa theo chiều ngang */
+    border: 2px solid;
+}
+#myForm {
+    width: 50%; /* Đặt chiều rộng của form tùy ý */
+    height: 600px;
+    margin: 0 auto; /* Để căn giữa theo chiều ngang */
+    border: 2px solid;
+}
+/* Thêm định dạng cho nhãn và input */
+label, input, select {
+    display: block;
+    margin-left: 20px;
+    font-size: 20px;
+}
+label{
+    margin-bottom: 10px;
+}
+input{
+    margin-bottom: 10px;
+    width: 400px; /* Đảm bảo nút sẽ nằm trên một dòng riêng biệt */
+}
+select {
+    margin-bottom: 10px;
+    width: 200px; /* Đảm bảo nút sẽ nằm trên một dòng riêng biệt */
+}
+/* Định dạng nút submit */
+button {
+    width: 150px;
+    height: 50px;
+    margin-left: auto;
+    margin-right: auto; /* Đảm bảo nút sẽ nằm trên một dòng riêng biệt */
+    font-size: 30px; /* Chọn một kích thước font tùy ý */
+    font-family: 'Segoe UI'; /* Chọn kiểu chữ Seogiu iu */
+    text-decoration: none;
+    color: black;
+    margin-left: 250px;
+}
+
+.header-menu-plus {
+    background-color: #4F4F4F; /* Chọn một mã màu xám tùy ý */
+    padding: 10px; /* Tùy chọn: Thêm padding nếu cần thiết */
+    height: 50px;
+    display: flex;
+    align-items: center; /* Căn giữa theo chiều dọc */
+}
+
+.header-menu-plus a {
+    font-size: 40px; /* Chọn một kích thước font tùy ý */
+    font-family: 'Segoe UI'; /* Chọn kiểu chữ Seogiu iu */
+    text-decoration: none;
+    color: white;
+}
+
