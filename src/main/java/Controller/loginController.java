@@ -26,6 +26,7 @@ public class loginController extends HttpServlet {
     private loginDAO loginDao;
     private changeDAO changeDao = new changeDAO();
     private forgotDAO forgotDao = new forgotDAO();
+    private static final int MIN_PASSWORD_LENGTH = 8;
     public void init() {
         loginDao = new loginDAO();
     }
@@ -36,6 +37,10 @@ public class loginController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getServletPath();
+        if (action == null) {
+            response.sendRedirect(request.getContextPath() + "/login.jsp");
+            return;
+        }
         switch (action){
             case  "/login_post":
                 authenticate(request, response);
@@ -142,6 +147,12 @@ public class loginController extends HttpServlet {
         String username = request.getParameter("username");
         String email = request.getParameter("email");
         String subject = "Mã OTP xác nhận của bạn là:";
+        if (username == null || username.isEmpty() || email == null || email.isEmpty()) {
+            request.setAttribute("error", "Vui lòng nhập tên đăng nhập và email!");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/login/forgot.jsp");
+            dispatcher.forward(request, response);
+            return;
+        }
 
         taikhoan usernameModel = new taikhoan();
         usernameModel.setUsername(username);
@@ -180,6 +191,16 @@ public class loginController extends HttpServlet {
         thongtincanhan emailModel = new thongtincanhan();
         emailModel.setEmail(email);
 
+        // Kiểm tra tính hợp lệ của username, email và mật khẩu mới
+        if (username == null || username.isEmpty() ||
+                email == null || email.isEmpty() ||
+                newpassword == null || newpassword.isEmpty() ||
+                newpassword.length() < MIN_PASSWORD_LENGTH || !isValidPassword(newpassword)) {
+            request.setAttribute("error", "Vui lòng điền đầy đủ thông tin và mật khẩu phải đủ độ dài và định dạng!");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/login/forgot.jsp");
+            dispatcher.forward(request, response);
+            return;
+        }
         if(!otp.equals(maOtp))
         {
             maOtp = null;
@@ -206,7 +227,6 @@ public class loginController extends HttpServlet {
         }
 
     }
-
     private void ChangePass(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException{
         String username = request.getParameter("username");
@@ -214,6 +234,18 @@ public class loginController extends HttpServlet {
         String newpassword = request.getParameter("newpassword");
         String confirmnewpass = request.getParameter("confirmnewpass");
 
+        if (username == null || username.isEmpty() ||
+                oldpassword == null || oldpassword.isEmpty() ||
+                newpassword == null || newpassword.isEmpty() ||
+                confirmnewpass == null || confirmnewpass.isEmpty() ||
+                newpassword.length() < MIN_PASSWORD_LENGTH || !isValidPassword(newpassword)) {
+            request.setAttribute("error", "Vui lòng nhập đầy đủ thông tin và mật khẩu phải đủ độ dài và định dạng!");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/login/change.jsp");
+            dispatcher.forward(request, response);
+            return;
+        }
+
+        // Kiểm tra tính hợp lệ của mật khẩu mới và mật khẩu xác nhận
         if (!newpassword.equals(confirmnewpass)) {
             request.setAttribute("error", "Mật khẩu mới không trùng khớp!");
             RequestDispatcher dispatcher = request.getRequestDispatcher("/login/change.jsp");
@@ -248,6 +280,8 @@ public class loginController extends HttpServlet {
             e.printStackTrace();
         }
     }
+
+
     private void FromLogin(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
         RequestDispatcher dispatcher = request.getRequestDispatcher("/login/login.jsp");
@@ -263,4 +297,52 @@ public class loginController extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("/login/change.jsp");
         dispatcher.forward(request, response);
     }
+    private boolean isValidPassword(String password) {
+        // Kiểm tra độ dài của mật khẩu
+        if (password.length() < MIN_PASSWORD_LENGTH) {
+            return false;
+        }
+
+        // Kiểm tra xem mật khẩu có chứa ít nhất một chữ cái hoa
+        boolean hasUpperCase = false;
+        for (char c : password.toCharArray()) {
+            if (Character.isUpperCase(c)) {
+                hasUpperCase = true;
+                break;
+            }
+        }
+        if (!hasUpperCase) {
+            return false;
+        }
+
+        // Kiểm tra xem mật khẩu có chứa ít nhất một chữ cái thường
+        boolean hasLowerCase = false;
+        for (char c : password.toCharArray()) {
+            if (Character.isLowerCase(c)) {
+                hasLowerCase = true;
+                break;
+            }
+        }
+        if (!hasLowerCase) {
+            return false;
+        }
+
+        // Kiểm tra xem mật khẩu có chứa ít nhất một số
+        boolean hasDigit = false;
+        for (char c : password.toCharArray()) {
+            if (Character.isDigit(c)) {
+                hasDigit = true;
+                break;
+            }
+        }
+        if (!hasDigit) {
+            return false;
+        }
+
+        // Kiểm tra các yêu cầu đặc biệt khác tùy theo yêu cầu bảo mật cụ thể (ví dụ: không chứa ký tự đặc biệt)
+
+        // Nếu mật khẩu vượt qua tất cả các kiểm tra, trả về true
+        return true;
+    }
+
 }
