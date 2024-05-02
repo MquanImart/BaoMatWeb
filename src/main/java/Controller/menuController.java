@@ -3,10 +3,7 @@ package Controller;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -87,6 +84,9 @@ public class menuController extends HttpServlet {
         HttpSession session = request.getSession(false);
         session.setAttribute("user", null);
         session.invalidate();
+        session = request.getSession(true);
+        String csrfToken = UUID.randomUUID().toString();
+        session.setAttribute("csrfToken", csrfToken);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/login/login.jsp");
         dispatcher.forward(request, response);
     }
