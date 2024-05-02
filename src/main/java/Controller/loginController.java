@@ -19,7 +19,6 @@ import java.util.UUID;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
-import org.apache.commons.text.StringEscapeUtils;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.mail.*;
@@ -38,6 +37,7 @@ public class loginController extends HttpServlet {
     private loginDAO loginDao;
     private changeDAO changeDao = new changeDAO();
     private forgotDAO forgotDao = new forgotDAO();
+    private static final int MIN_PASSWORD_LENGTH = 8;
     public void init() {
         loginDao = new loginDAO();
     }
@@ -97,15 +97,11 @@ public class loginController extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-
         try {
             HttpSession session = request.getSession();
-            String secretKey = (String) session.getAttribute("secretKey");
             String csrfToken = request.getParameter("csrfToken");
-            String escapedXmlcsrf = StringEscapeUtils.escapeXml10(csrfToken);
             String sessionToken = (String) session.getAttribute("csrfToken");
-
-            if (escapedXmlcsrf == null || !escapedXmlcsrf.equals(sessionToken)) {
+            if (csrfToken == null || !csrfToken.equals(sessionToken)) {
                 request.setAttribute("error", "Token không hợp lệ!");
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/login/login.jsp");
                 dispatcher.forward(request, response);
@@ -163,8 +159,16 @@ public class loginController extends HttpServlet {
                     dispatcher.forward(request, response);
                 }
             }
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            throw new Exception("Một lỗi đã xảy ra trong ExampleServlet.");
+        } catch (Exception ex) {
+            // Log lỗi vào hệ thống ghi log (khuyến khích)
+            // logError(ex);
+
+            // Đặt thông báo lỗi tùy chỉnh vào thuộc tính "errorMessage"
+            request.setAttribute("errorMessage", "Xin lỗi, đã xảy ra một lỗi không mong muốn.");
+
+            // Forward đến trang hiển thị lỗi
+            request.getRequestDispatcher("/header_menu/error.jsp").forward(request, response);
         }
     }
 
@@ -274,6 +278,15 @@ public class loginController extends HttpServlet {
         String otp = request.getParameter("otp");
         String newpassword = request.getParameter("newpassword");
 
+        if (username == null || username.isEmpty() ||
+                email == null || email.isEmpty() ||
+                newpassword == null || newpassword.isEmpty() ||
+                newpassword.length() < MIN_PASSWORD_LENGTH || !isValidPassword(newpassword)) {
+            request.setAttribute("error", "Vui lòng điền đầy đủ thông tin và mật khẩu phải đủ độ dài và định dạng!");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/login/forgot.jsp");
+            dispatcher.forward(request, response);
+            return;
+        }
         HttpSession session = request.getSession();
         String secretKey = (String) session.getAttribute("secretKey");
         String csrfToken = request.getParameter("csrfToken");
@@ -320,6 +333,17 @@ public class loginController extends HttpServlet {
         String oldpassword = request.getParameter("oldpassword");
         String newpassword = request.getParameter("newpassword");
         String confirmnewpass = request.getParameter("confirmnewpass");
+
+        if (username == null || username.isEmpty() ||
+                oldpassword == null || oldpassword.isEmpty() ||
+                newpassword == null || newpassword.isEmpty() ||
+                confirmnewpass == null || confirmnewpass.isEmpty() ||
+                newpassword.length() < MIN_PASSWORD_LENGTH || !isValidPassword(newpassword)) {
+            request.setAttribute("error", "Vui lòng nhập đầy đủ thông tin và mật khẩu phải đủ độ dài và định dạng!");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/login/change.jsp");
+            dispatcher.forward(request, response);
+            return;
+        }
 
         String csrfToken = request.getParameter("csrfToken");
         HttpSession session = request.getSession();
@@ -368,6 +392,53 @@ public class loginController extends HttpServlet {
             }
         }
 
+    }
+    private boolean isValidPassword(String password) {
+        // Kiểm tra độ dài của mật khẩu
+        if (password.length() < MIN_PASSWORD_LENGTH) {
+            return false;
+        }
+
+        // Kiểm tra xem mật khẩu có chứa ít nhất một chữ cái hoa
+        boolean hasUpperCase = false;
+        for (char c : password.toCharArray()) {
+            if (Character.isUpperCase(c)) {
+                hasUpperCase = true;
+                break;
+            }
+        }
+        if (!hasUpperCase) {
+            return false;
+        }
+
+        // Kiểm tra xem mật khẩu có chứa ít nhất một chữ cái thường
+        boolean hasLowerCase = false;
+        for (char c : password.toCharArray()) {
+            if (Character.isLowerCase(c)) {
+                hasLowerCase = true;
+                break;
+            }
+        }
+        if (!hasLowerCase) {
+            return false;
+        }
+
+        // Kiểm tra xem mật khẩu có chứa ít nhất một số
+        boolean hasDigit = false;
+        for (char c : password.toCharArray()) {
+            if (Character.isDigit(c)) {
+                hasDigit = true;
+                break;
+            }
+        }
+        if (!hasDigit) {
+            return false;
+        }
+
+        // Kiểm tra các yêu cầu đặc biệt khác tùy theo yêu cầu bảo mật cụ thể (ví dụ: không chứa ký tự đặc biệt)
+
+        // Nếu mật khẩu vượt qua tất cả các kiểm tra, trả về true
+        return true;
     }
     private void FromLogin(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {

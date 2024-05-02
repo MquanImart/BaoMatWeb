@@ -71,7 +71,7 @@ public class loginDAO {
              PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM taikhoan WHERE username = ?")) {
             preparedStatement.setString(1, username);
             ResultSet rs = preparedStatement.executeQuery();
-
+            System.out.println();
             while (rs.next()) {
                 String dbUsername = rs.getString("username");
                 String dbPassword = rs.getString("pass");
