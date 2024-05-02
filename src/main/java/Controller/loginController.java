@@ -113,6 +113,11 @@ public class loginController extends HttpServlet {
                     dispatcher.forward(request, response);
                 }
             }
+            else {
+                request.setAttribute("error", "Thông tin đăng nhập không hợp lệ");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/login/login.jsp");
+                dispatcher.forward(request, response);
+            }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
