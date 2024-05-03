@@ -21,6 +21,7 @@ public class SecurityHeaderFilter implements Filter {
         HttpServletResponse httpResp = (HttpServletResponse) response;
         // Thêm header X-Content-Type-Options vào mọi HTTP response
         httpResp.setHeader("X-Frame-Options", "SAMEORIGIN");
+        httpResp.setHeader("X-Content-Type-Options", "nosniff");
         chain.doFilter(request, response);
     }
 
