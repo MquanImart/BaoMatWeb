@@ -22,6 +22,8 @@ public class SecurityHeaderFilter implements Filter {
         // Thêm header X-Content-Type-Options vào mọi HTTP response
         httpResp.setHeader("X-Frame-Options", "SAMEORIGIN");
         httpResp.setHeader("X-Content-Type-Options", "nosniff");
+        httpResp.setHeader("Access-Control-Allow-Origin", "https://fonts.googleapis.com https://fonts.gstatic.com https://stackpath.bootstrapcdn.com https://use.fontawesome.com https://cdnjs.cloudflare.com https://localhost:8080");
+        httpResp.setHeader("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
         chain.doFilter(request, response);
     }
 
