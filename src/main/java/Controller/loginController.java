@@ -102,9 +102,7 @@ public class loginController extends HttpServlet {
             String csrfToken = request.getParameter("csrfToken");
             String sessionToken = (String) session.getAttribute("csrfToken");
             if (csrfToken == null || !csrfToken.equals(sessionToken)) {
-                request.setAttribute("error", "Token không hợp lệ!");
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/login/login.jsp");
-                dispatcher.forward(request, response);
+                return;
             } else {
                 taikhoan tk = loginDao.findByUsername(username); // Tìm tài khoản dựa trên tên người dùng
                 if (tk != null) {
@@ -280,8 +278,7 @@ public class loginController extends HttpServlet {
 
         if (username == null || username.isEmpty() ||
                 email == null || email.isEmpty() ||
-                newpassword == null || newpassword.isEmpty() ||
-                newpassword.length() < MIN_PASSWORD_LENGTH || !isValidPassword(newpassword)) {
+                newpassword == null || newpassword.length() < MIN_PASSWORD_LENGTH || !isValidPassword(newpassword)) {
             request.setAttribute("error", "Vui lòng điền đầy đủ thông tin và mật khẩu phải đủ độ dài và định dạng!");
             RequestDispatcher dispatcher = request.getRequestDispatcher("/login/forgot.jsp");
             dispatcher.forward(request, response);
@@ -378,9 +375,9 @@ public class loginController extends HttpServlet {
                         }
                     } else {
                         // Mật khẩu không khớp
+                        request.setAttribute("error", "Mật khẩu không chính xác");
                         RequestDispatcher dispatcher = request.getRequestDispatcher("/login/change.jsp");
                         dispatcher.forward(request, response);
-                        request.setAttribute("error", "Mật khẩu không chính xác");
                     }
                 } else {
                     request.setAttribute("error", "Tài khoản không tồn tại!");
@@ -435,9 +432,22 @@ public class loginController extends HttpServlet {
             return false;
         }
 
-        // Kiểm tra các yêu cầu đặc biệt khác tùy theo yêu cầu bảo mật cụ thể (ví dụ: không chứa ký tự đặc biệt)
+        boolean hasSpecial = false;
+        for (char c : password.toCharArray()) {
+            if (!Character.isLetterOrDigit(c)) { // Kiểm tra xem ký tự không phải là chữ hoặc số
+                hasSpecial = true;
+                break;
+            }
+        }
+        if (!hasSpecial) {
+            return false;
+        }
+        for (char c : password.toCharArray()) {
+            if (c == '"' || c == '-') {
+                return false;
+            }
+        }
 
-        // Nếu mật khẩu vượt qua tất cả các kiểm tra, trả về true
         return true;
     }
     private void FromLogin(HttpServletRequest request, HttpServletResponse response)
