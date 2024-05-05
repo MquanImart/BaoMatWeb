@@ -14,17 +14,8 @@
 		  crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/login.css" />
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/base.css" />
-	<style>
-		input { text-transform: none; }
-		.error_mess{
-			width: 100%; height: 3rem;
-			text-align: center;
-		}
-		.input-box input{
-			padding-left: 3rem;
-		}
-	</style>
 	<link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/css/favicon.ico">
+	<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://cdnjs.cloudflare.com; style-src 'self' https://stackpath.bootstrapcdn.com https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; connect-src 'self'; img-src 'self' https://www.evn.com.vn/userfile/VH/User/huyent_tcdl/images/2021/6/hrmscuatapdoan24621(1).jpeg; form-action 'self';">
 </head>
 <body>
 <%taikhoan username = (taikhoan) session.getAttribute("user"); %>

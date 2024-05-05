@@ -20,11 +20,11 @@ public class SecurityHeaderFilter implements Filter {
             throws IOException, ServletException {
         HttpServletResponse httpResp = (HttpServletResponse) response;
         // Thêm header X-Content-Type-Options vào mọi HTTP response
-        httpResp.setHeader("X-Frame-Options", "SAMEORIGIN");
-        httpResp.setHeader("X-Content-Type-Options", "nosniff");
-        httpResp.setHeader("Access-Control-Allow-Origin", "https://fonts.googleapis.com https://fonts.gstatic.com https://stackpath.bootstrapcdn.com https://use.fontawesome.com https://cdnjs.cloudflare.com https://localhost:8443");
         httpResp.setHeader("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
-        httpResp.setHeader("Content-Security-Policy", "default-src *; script-src 'self'; style-src *; font-src 'self'; connect-src 'self'; * data; frame-src 'none'; frame-ancestors 'none'; media-src 'none'; object-src 'none'; manifest-src 'none'; worker-src 'none'; form-action 'self'");
+        //httpResp.setHeader("Content-Security-Policy", "default-src 'none'; script-src 'self' https://cdnjs.cloudflare.com  https://cdn.jsdelivr.net https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js; style-src 'self' https://cdn.jsdelivr.net https://stackpath.bootstrapcdn.com https://fonts.googleapis.com https://cdnjs.cloudflare.com ; font-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com https://cdnjs.cloudflare.com ; connect-src 'self'; img-src 'self' https://www.evn.com.vn/userfile/VH/User/huyent_tcdl/images/2021/6/hrmscuatapdoan24621(1).jpeg; frame-ancestors 'none'; form-action 'self';");
+        httpResp.setHeader("X-Content-Type-Options", "nosniff");
+        httpResp.setHeader("X-Frame-Options", "SAMEORIGIN");
+        httpResp.setHeader("Access-Control-Allow-Origin", "https://fonts.googleapis.com https://fonts.gstatic.com https://stackpath.bootstrapcdn.com https://use.fontawesome.com https://cdnjs.cloudflare.com https://localhost:8443");
         chain.doFilter(request, response);
     }
 

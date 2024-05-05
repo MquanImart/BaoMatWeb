@@ -1,4 +1,6 @@
-    h1{
+/* Nội dung file CSS cũ */
+
+h1 {
     font-size: 3.5rem;
     text-align: center;
 }
@@ -14,7 +16,8 @@
 .image {
     float: left;
 }
-.form{
+
+.form {
     float: right;
     width: 42rem;
     background: #F5F5F5;
@@ -23,40 +26,46 @@
     padding: 2rem;
 }
 
-.input-box{
+.input-box {
     width: 36rem;
     height: 5rem;
     align-self: center;
-    display: flex; flex-direction: row; justify-content: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     margin: 2rem;
- }
+}
 
-.input-box input{
+.input-box input {
     width: 30rem;
-    height: 5rem    ;
+    height: 5rem;
     background: #C0C0C0;
     border-radius: 25px;
     font-size: 16px;
     color: #FFFFFF;
 }
 
-.input-box input::placeholder{
+.input-box input::placeholder {
     color: #FFFFFF;
     padding-left: 2rem;
 }
 
-.box_icon_login{
-    width: 5.5rem ; height: 5rem;
-    display: flex; justify-content: center; align-content: center;
+.box_icon_login {
+    width: 5.5rem;
+    height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-content: center;
 }
 
-.input-box i{
-    width: 4.5rem; height: 4rem;
+.input-box i {
+    width: 4.5rem;
+    height: 4rem;
     padding-right: 1rem;
     padding-top: 2rem;
 }
 
-.forgot-change{
+.forgot-change {
     display: flex;
     justify-content: space-between;
     font-size: 15px;
@@ -64,16 +73,21 @@
     padding: 0 10px;
 }
 
-.forgot-change a{
+.forgot-change a {
     color: #0000FF;
     text-decoration: none;
     margin: 0 40px auto;
 }
-.box_button_login{
-    width: 100%; height: 5rem;
-    display: flex; flex-direction: row; justify-content: center;
+
+.box_button_login {
+    width: 100%;
+    height: 5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
-.btn{
+
+.btn {
     width: 25rem;
     height: 5rem;
     background: var(--maincolor);
@@ -81,21 +95,45 @@
     border-radius: 40px;
     cursor: pointer;
     color: #FFFFFF;
-    font-size:20px;
+    font-size: 20px;
     justify-content: center;
 }
 
-.box_show{
+.box_show {
     color: red;
-    display: flex; flex-direction: row; justify-content: end;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
 }
 
-.btn_gui{
-    width: 20rem; height: 4rem;
+.btn_gui {
+    width: 20rem;
+    height: 4rem;
     border-radius: 0;
     background-color: var(--maincolor);
 }
-.box_form_a{
+
+.box_form_a {
     width: 100%;
-    display: flex; justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Đoạn CSS mới chèn vào */
+input {
+    text-transform: none;
+}
+
+.error_mess {
+    width: 100%;
+    height: 3rem;
+    text-align: center;
+}
+
+.box_form_a {
+    margin-top: 1rem;
+}
+
+.input-box input {
+    padding-left: 3rem;
 }
