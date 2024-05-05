@@ -452,9 +452,6 @@ public class loginController extends HttpServlet {
     }
     private void FromLogin(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
-        HttpSession session = request.getSession(true);
-        String csrfToken = UUID.randomUUID().toString();
-        session.setAttribute("csrfToken", csrfToken);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/login/login.jsp");
         dispatcher.forward(request, response);
     }

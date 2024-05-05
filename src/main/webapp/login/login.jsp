@@ -1,4 +1,5 @@
 <%@ page import="Model.taikhoan" %>
+<%@ page import="java.util.UUID" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
@@ -17,8 +18,12 @@
 	<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://cdnjs.cloudflare.com; style-src 'self' https://stackpath.bootstrapcdn.com https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; connect-src 'self'; img-src 'self' https://www.evn.com.vn/userfile/VH/User/huyent_tcdl/images/2021/6/hrmscuatapdoan24621(1).jpeg; form-action 'self';">
 </head>
 <body>
-<%taikhoan username = (taikhoan) session.getAttribute("user"); %>
-<%if (username != null) {%>
+<%
+	String csrfToken = UUID.randomUUID().toString();
+	session.setAttribute("csrfToken", csrfToken);
+	taikhoan username = (taikhoan) session.getAttribute("user"); %>
+<%if (username != null) {
+	%>
 <jsp:forward page="/trangchu"></jsp:forward>
 <%} else {%>
 <div class="container">
