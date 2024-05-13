@@ -92,44 +92,53 @@ public class qlnhanvienController extends HttpServlet {
         String user = getMatk(request,response);
         if(session != null && user != null){
             taikhoan tk = (taikhoan) session.getAttribute("user");
-
+            nhanvien nv1 = qlnhanvienDAO.LayThongTinNhanVien(tk.getMatk());
             String matk = request.getParameter("matk");
+            nhanvien nv2 = qlnhanvienDAO.LayThongTinNhanVien(matk);
 
-            thongtincanhan tt = thongtincanhanDAO.layThongTinCaNhan(matk);
-            request.setAttribute("thongtincanhan", tt);
+            int capBac = chucvuDAO.CapBacQuyenHan(tk.getMatk());
 
-            String madc = tt.getDiachi();
+            if( capBac == 3 || (capBac == 2 && nv1.getMacn().equals(nv2.getMacn())) || (capBac == 1 && nv1.getMapb().equals(nv2.getMapb()))) {
+                // Xử lý khi điều kiện đúng
+                thongtincanhan tt = thongtincanhanDAO.layThongTinCaNhan(matk);
+                request.setAttribute("thongtincanhan", tt);
 
-            diachi dc = thongtincanhanDAO.layDiaChi(madc);
-            request.setAttribute("diachi",dc);
+                String madc = tt.getDiachi();
+                diachi dc = thongtincanhanDAO.layDiaChi(madc);
+                request.setAttribute("diachi",dc);
 
-            cancuoccongdan cccd = thongtincanhanDAO.layCCCD(matk);
-            request.setAttribute("cancuoc",cccd);
-            diachi dc_cancuoc = thongtincanhanDAO.layDiaChi(cccd.getMadc());
-            request.setAttribute("diachi_cc",dc_cancuoc);
+                cancuoccongdan cccd = thongtincanhanDAO.layCCCD(matk);
+                request.setAttribute("cancuoc",cccd);
+                diachi dc_cancuoc = thongtincanhanDAO.layDiaChi(cccd.getMadc());
+                request.setAttribute("diachi_cc",dc_cancuoc);
 
+                taikhoan tkhoan = thongtincanhanDAO.layTaiKhoan(matk);
+                request.setAttribute("taikhoan", tkhoan);
 
-            taikhoan tkhoan = thongtincanhanDAO.layTaiKhoan(matk);
-            request.setAttribute("taikhoan", tkhoan);
+                String chucvu = thongtincanhanDAO.layChucVu(matk);
+                request.setAttribute("chucvu", chucvu);
 
-            String chucvu = thongtincanhanDAO.layChucVu(matk);
-            request.setAttribute("chucvu", chucvu);
+                String congviec = thongtincanhanDAO.LayCongViec(matk);
+                request.setAttribute("congviec",congviec);
 
-            String congviec = thongtincanhanDAO.LayCongViec(matk);
-            request.setAttribute("congviec",congviec);
+                LocalDate ngaybatdau = thongtincanhanDAO.layNgayBatDau(matk);
+                request.setAttribute("ngaybatdau",ngaybatdau);
 
-            LocalDate ngaybatdau = thongtincanhanDAO.layNgayBatDau(matk);
-            request.setAttribute("ngaybatdau",ngaybatdau);
+                String tenpb = thongtincanhanDAO.layTenPB(matk);
+                request.setAttribute("tenpb",tenpb);
 
-            String tenpb = thongtincanhanDAO.layTenPB(matk);
-            request.setAttribute("tenpb",tenpb);
+                String tencn = thongtincanhanDAO.layTenCN(matk);
+                request.setAttribute("tencn",tencn);
 
-            String tencn = thongtincanhanDAO.layTenCN(matk);
-            request.setAttribute("tencn",tencn);
-
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/qlnhanvien/chitietnhanvien.jsp");
-            dispatcher.forward(request, response);
-        }else {
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/qlnhanvien/chitietnhanvien.jsp");
+                dispatcher.forward(request, response);
+            } else {
+                // Xử lý khi điều kiện sai
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/login/login.jsp");
+                dispatcher.forward(request, response);
+            }
+        } else {
+            // Xử lý khi session hoặc user là null
             RequestDispatcher dispatcher = request.getRequestDispatcher("/login/login.jsp");
             dispatcher.forward(request, response);
         }
