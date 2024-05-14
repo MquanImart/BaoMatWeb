@@ -1,3 +1,4 @@
+<%@ page import="java.util.UUID" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
@@ -45,6 +46,7 @@
                 </nav>
                 <br>
                 <form class="row" action="<%=request.getContextPath()%>/tuyennhanvien">
+					<input type="hidden" id = "csrfToken" name="csrfToken" value="<%= session.getAttribute("csrfToken") %>">
 					<div class="container body container_css">
 						<div class = "col">
 							<div class="box_info">
@@ -228,6 +230,20 @@
 						</div>
 					</div>
                 </form>
+				<script>
+					function createCSRF_Token() {
+						<%session = request.getSession(true);
+                		String csrfToken = UUID.randomUUID().toString();
+                		session.setAttribute("csrfToken", csrfToken);%>
+						let csrf_token = document.getElementById("csrfToken");
+						csrf_token.value = "<%=session.getAttribute("csrfToken")%>";
+					}
+
+					document.addEventListener('DOMContentLoaded', function() {
+						var form = document.querySelector('.row');
+						form.addEventListener('submit', createCSRF_Token);
+					});
+				</script>
 				<script>
 
 					window.onload = function() {

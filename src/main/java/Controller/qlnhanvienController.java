@@ -157,6 +157,7 @@ public class qlnhanvienController extends HttpServlet {
             if(mainComboValue == null){
                 List<String> listmapb = phongbanDAO.Selected_PB_BY_CN("CN001");
                 request.setAttribute("listphongban", listmapb);
+
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/qlnhanvien/chitietnhanvien.jsp");
                 dispatcher.forward(request, response);
             }
@@ -224,52 +225,62 @@ public class qlnhanvienController extends HttpServlet {
     }
     public void TuyenNhanVien(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException{
-        String user = getMatk(request,response);
-        if (user != null) {
-            String matk = forgotDAO.getNewMatk();
-            String hoten = request.getParameter("hoten");
-            LocalDate ngaysinh = LocalDate.parse(request.getParameter("ngaysinh"));
-            String gioitinh = request.getParameter("gioitinh");
+        String csrfToken = request.getParameter("csrfToken");
+        HttpSession session = request.getSession();
+        String sessionToken = (String) session.getAttribute("csrfToken");
 
-            String so_cccd = request.getParameter("cc_cccd");
-            LocalDate ngaycap = LocalDate.parse(request.getParameter("cc_ngaycap"));
-            String madc_cc = diachiDAO.getDiaChiCanCuoc("DC");
-            String tinhtp_cc = request.getParameter("cc_tinhtp");
-            String cc_quanhuyen = request.getParameter("cc_quanhuyen");
-            String cc_phuongxa = request.getParameter("cc_phuongxa");
-            String cc_sonha = request.getParameter("cc_sonha");
+        if (csrfToken == null || !csrfToken.equals(sessionToken)) {
+            request.setAttribute("error", "Token không hợp lệ!");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/login/login.jsp");
+            dispatcher.forward(request, response);
+        } else {
+            String user = getMatk(request,response);
+            if (user != null) {
+                String matk = forgotDAO.getNewMatk();
+                String hoten = request.getParameter("hoten");
+                LocalDate ngaysinh = LocalDate.parse(request.getParameter("ngaysinh"));
+                String gioitinh = request.getParameter("gioitinh");
 
-            String madc_dc = diachiDAO.getDiaChi();
-            String dc_tinhtp = request.getParameter("dc_tinhtp");
-            String dc_quanhuyen = request.getParameter("dc_quanhuyen");
-            String dc_phuongxa = request.getParameter("dc_phuongxa");
-            String dc_sonha = request.getParameter("cc_sonha");
+                String so_cccd = request.getParameter("cc_cccd");
+                LocalDate ngaycap = LocalDate.parse(request.getParameter("cc_ngaycap"));
+                String madc_cc = diachiDAO.getDiaChiCanCuoc("DC");
+                String tinhtp_cc = request.getParameter("cc_tinhtp");
+                String cc_quanhuyen = request.getParameter("cc_quanhuyen");
+                String cc_phuongxa = request.getParameter("cc_phuongxa");
+                String cc_sonha = request.getParameter("cc_sonha");
 
-            String sdt = request.getParameter("sdt");
-            String email = request.getParameter("email");
-            String username = request.getParameter("username");
-            String pass = request.getParameter("pass");
-            String congviec = request.getParameter("congviec");
-            String phongban = request.getParameter("phongban");
-            String chinhanh = request.getParameter("chinhanh");
-            String bangcap = request.getParameter("bangcap");
-            LocalDate ngaybatdau = LocalDate.parse(request.getParameter("ngaybatdau"));
+                String madc_dc = diachiDAO.getDiaChi();
+                String dc_tinhtp = request.getParameter("dc_tinhtp");
+                String dc_quanhuyen = request.getParameter("dc_quanhuyen");
+                String dc_phuongxa = request.getParameter("dc_phuongxa");
+                String dc_sonha = request.getParameter("cc_sonha");
 
-            diachi diachi_cc = new diachi(madc_cc, tinhtp_cc, cc_quanhuyen, cc_phuongxa, cc_sonha);
-            diachi diachi_nv = new diachi(madc_dc, dc_tinhtp, dc_quanhuyen, dc_phuongxa, dc_sonha);
-            thongtincanhan ttcn = new thongtincanhan(matk, hoten, ngaysinh, gioitinh, madc_dc, sdt, email, bangcap);
-            cancuoccongdan cccd = new cancuoccongdan(matk, so_cccd, ngaycap, madc_cc);
-            nhanvien nv = new nhanvien(matk, chinhanh, phongban, ngaybatdau, "Đang hoạt động", congviec);
-            taikhoan tk = new taikhoan(username, pass, matk);
+                String sdt = request.getParameter("sdt");
+                String email = request.getParameter("email");
+                String username = request.getParameter("username");
+                String pass = request.getParameter("pass");
+                String congviec = request.getParameter("congviec");
+                String phongban = request.getParameter("phongban");
+                String chinhanh = request.getParameter("chinhanh");
+                String bangcap = request.getParameter("bangcap");
+                LocalDate ngaybatdau = LocalDate.parse(request.getParameter("ngaybatdau"));
 
-            diachiDAO.insertDiaChi(diachi_cc);
-            diachiDAO.insertDiaChi(diachi_nv);
-            qlnhanvienDAO.ThemNhanVien(nv);
-            forgotDAO.ThemTaiKhoan(tk);
-            thongtincanhanDAO.ThemThongTinCaNhan(ttcn);
-            thongtincanhanDAO.ThemCCCD(cccd);
-            chucvuDAO.ThemChucVu(new chucvu(matk, "Nhân Viên"));
-            response.sendRedirect("quanlynhanvien");
+                diachi diachi_cc = new diachi(madc_cc, tinhtp_cc, cc_quanhuyen, cc_phuongxa, cc_sonha);
+                diachi diachi_nv = new diachi(madc_dc, dc_tinhtp, dc_quanhuyen, dc_phuongxa, dc_sonha);
+                thongtincanhan ttcn = new thongtincanhan(matk, hoten, ngaysinh, gioitinh, madc_dc, sdt, email, bangcap);
+                cancuoccongdan cccd = new cancuoccongdan(matk, so_cccd, ngaycap, madc_cc);
+                nhanvien nv = new nhanvien(matk, chinhanh, phongban, ngaybatdau, "Đang hoạt động", congviec);
+                taikhoan tk = new taikhoan(username, pass, matk);
+
+                diachiDAO.insertDiaChi(diachi_cc);
+                diachiDAO.insertDiaChi(diachi_nv);
+                qlnhanvienDAO.ThemNhanVien(nv);
+                forgotDAO.ThemTaiKhoan(tk);
+                thongtincanhanDAO.ThemThongTinCaNhan(ttcn);
+                thongtincanhanDAO.ThemCCCD(cccd);
+                chucvuDAO.ThemChucVu(new chucvu(matk, "Nhân Viên"));
+                response.sendRedirect("quanlynhanvien");
+            }
         }
     }
     public void ThemYeuCau(HttpServletRequest request, HttpServletResponse response)
