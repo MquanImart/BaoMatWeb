@@ -7,6 +7,7 @@
 <body>
 <h1>Error</h1>
 <p>${errorMessage}</p>
+<p>Mã lỗi: ${errorCode}</p>
 </body>
 </html>
 

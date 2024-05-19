@@ -164,7 +164,8 @@ public class loginController extends HttpServlet {
 
             // Đặt thông báo lỗi tùy chỉnh vào thuộc tính "errorMessage"
             request.setAttribute("errorMessage", "Xin lỗi, đã xảy ra một lỗi không mong muốn.");
-
+            int statusCode = HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
+            request.setAttribute("errorCode", statusCode);
             // Forward đến trang hiển thị lỗi
             request.getRequestDispatcher("/header_menu/error.jsp").forward(request, response);
         }
